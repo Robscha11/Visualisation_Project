@@ -1,15 +1,16 @@
 export let stopwords = `
+"­"
 •
 ●
 >
 <
 =
 –
-I
-II
-III
-IV
-V
+i
+ii
+iii
+iv
+v
 ab
 aber
 alle
