@@ -1,4 +1,8 @@
 export let stopwords = `
+st
+en
+wollen
+seite
 "­"
 •
 ●
@@ -11,6 +15,7 @@ ii
 iii
 iv
 v
+ff
 ab
 aber
 alle
