@@ -93,3 +93,16 @@ div.task {
 span.monospace {
   font-family: monospace;
 }
+
+
+label {
+  background-color: rgb(173, 74, 74);
+  border-radius: 100px;
+  margin: 0.5rem 0.5rem;
+  padding: 0.1rem 1.2rem;
+}
+
+svg {
+  background-color: rgb(63, 66, 18);
+}
+
