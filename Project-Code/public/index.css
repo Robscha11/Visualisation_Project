@@ -43,27 +43,6 @@ h3 {
   margin: 1rem 0 1rem 0;
 }
 
-table {
-  width: 100%;
-  border: none;
-}
-
-th,
-td {
-  border-bottom: 1px solid #ddd;
-  padding: 0 5px;
-}
-
-th {
-  text-align: left;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-td > span {
-  padding: 1px 5px;
-  margin: 0px 10px;
-}
 
 span.tag {
   display: inline;
@@ -94,15 +73,8 @@ span.monospace {
   font-family: monospace;
 }
 
-
-label {
-  background-color: rgb(173, 74, 74);
-  border-radius: 100px;
-  margin: 0.5rem 0.5rem;
-  padding: 0.1rem 1.2rem;
-}
-
-svg {
+/*svg {
   background-color: rgb(63, 66, 18);
-}
+}*/
+
 

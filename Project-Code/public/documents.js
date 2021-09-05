@@ -56,9 +56,9 @@ function getWords (name){
     }
   }
 
-  /*buffer = []
+  buffer = []
   Words.forEach(d => buffer.push(stem(d)))
-  Words = buffer.flat()*/
+  Words = buffer.flat()
 
   return Words
 }
