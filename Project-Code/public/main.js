@@ -3,7 +3,7 @@ import { getdocuments } from "./documents";
 import { getWordList } from "./wordList";
 import { gettfidf } from "./tfidf";
 import { wordcloud } from "./wordcloud";
-
+import { stackedBar } from "./stackedBar";
 
 //update handler for IDF
 var useIDF = false;
@@ -32,5 +32,23 @@ function update(){
     wordsPerGenre: tfidf,
   });
 }
+
+document.getElementById("button").onclick = function() {searchNode()};
+
+function searchNode() {
+  var selectedVal = document.getElementById("search").value
+  if (selectedVal == "none") {
+    console.log("nothing")
+  } else {
+    stackedBar({
+      svg: d3.select("#barchart"),
+      wordsPerGenre: tfidf,
+      search: selectedVal,
+      textColor: d3.rgb(0,255,0,255),
+    });
+  }
+}
+searchNode();
+
 
 
