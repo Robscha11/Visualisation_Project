@@ -11,21 +11,27 @@ var tfidf = gettfidf(documents,wordList);
 
 //console.log(documents)
 //console.log(wordList)
-console.log(tfidf)
+//console.log(tfidf)
+
+ //update handler
+ if (document.getElementById('checkIDF').checked) 
+  {
+    console.log("idf on");
+  } else {
+      console.log("idf off");
+  }
 
 wordcloud({
-  svg: d3.select("#wordcloud1"),
+  svg: d3.select("#wordcloud"),
   wordsPerGenre: tfidf,
-  selection: d3.select("#party1"),
-  textColor: d3.rgb(255,0,0,255),
 });
 
-wordcloud({
+/*wordcloud({
   svg: d3.select("#wordcloud2"),
   wordsPerGenre: tfidf,
   selection: d3.select("#party2"),
   textColor: d3.rgb(0,255,0,255),
-});
+});*/
 
 document.getElementById("button").onclick = function() {searchNode()};
 
