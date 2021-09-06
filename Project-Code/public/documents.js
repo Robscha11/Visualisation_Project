@@ -1,7 +1,7 @@
 import { stopwords } from "./stopwords";
 import stem from 'snowball-german'; //stemmer ab Zeile 59 ist nicht wirklich sinnvoll denke ich
 
-export function getdocuments() {
+export function getdocuments(useStemm) {
 //einlesen der Dateinamen
 var Parteien = []; 
 var WordFile = new XMLHttpRequest(); 
@@ -56,10 +56,12 @@ function getWords (name){
     }
   }
 
-  /*buffer = []
-  Words.forEach(d => buffer.push(stem(d)))
-  Words = buffer.flat()*/
-
+  if(useStemm){
+    buffer = []
+    Words.forEach(d => buffer.push(stem(d)))
+    Words = buffer.flat()
+  }
+  
   return Words
 }
 

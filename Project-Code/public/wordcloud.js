@@ -19,7 +19,8 @@ export function wordcloud({ svg, wordsPerGenre}) {
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  const size = d3.scaleLinear().range([10, 50]).domain([0,1]);
+  const size1 = d3.scaleLinear().range([10, 50]);
+  const size2 = d3.scaleLinear().range([10, 50]);
   const scaleOpacity = d3.scaleLinear().range([0.1, 1]).domain([10,50]);
 
   // fill the select
@@ -51,15 +52,18 @@ export function wordcloud({ svg, wordsPerGenre}) {
   function update() {
     genre1 = selectP1.property("value");
     const words1 = wordsPerGenre.get(genre1).slice(0, 50);
+    size1.domain(d3.extent(words1, (d) => d[1]));
 
     genre2 = selectP2.property("value");
     const words2 = wordsPerGenre.get(genre2).slice(0, 50);
+    size2.domain(d3.extent(words2, (d) => d[1]));
 
     var words = [];
     for(var i = 0; i <= words1.length-1; i++){
-      words.push(({ text: words1[i][0], size: size(words1[i][1]), key: genre1  }))
-      words.push(({ text: words2[i][0], size: size(words2[i][1]), key: genre2  }))
+      words.push(({ text: words1[i][0], size: size1(words1[i][1]), key: genre1  }))
+      words.push(({ text: words2[i][0], size: size2(words2[i][1]), key: genre2  }))
     }
+    console.log(words)
     
     layout.words(words);
     layout.start();

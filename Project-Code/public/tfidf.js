@@ -1,4 +1,4 @@
-export function gettfidf(documents,wordList) {
+export function gettfidf(documents,wordList,useIDF) {
     var parteien = documents.keys()
     var tfidfList = new Map();
 
@@ -14,11 +14,16 @@ export function gettfidf(documents,wordList) {
         var buffer2 = new Map();
         [...buffer.entries()].forEach(d => buffer2.set(d[0],d[1] /maxCount))
         //calculate idf score and multiplie with tf => tf-idf
-        /*var buffer3 = new Map();
-        [...buffer2.entries()].forEach(d => buffer3.set(d[0],count(d[0],d[1])))
-        buffer3 = new Map([...buffer3.entries()].sort((a,b) => b[1] - a[1]))*/
-        //store map of [word,score] to map of [party,[word,score]]
-        tfidfList.set(actualParty,Array.from(buffer2))
+        if(useIDF){
+            var buffer3 = new Map();
+            [...buffer2.entries()].forEach(d => buffer3.set(d[0],count(d[0],d[1])))
+            buffer3 = new Map([...buffer3.entries()].sort((a,b) => b[1] - a[1]))
+            tfidfList.set(actualParty,Array.from(buffer3))
+        }else{
+            //store map of [word,score] to map of [party,[word,score]]
+            tfidfList.set(actualParty,Array.from(buffer2))
+        }
+        
     }
     //function to count word in document
     function score(word,actualParty){
