@@ -52,5 +52,6 @@ function searchNode() {
 }
 searchNode();
 
+tagCloud(d3.select("#dots"), tfidf.slice(0, 3));
 
 
