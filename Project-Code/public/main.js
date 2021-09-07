@@ -37,21 +37,28 @@ document.getElementById("button").onclick = function() {searchNode()};
 
 function searchNode() {
   var selectedVal = document.getElementById("search").value
+  console.log(selectedVal);
   if (selectedVal == "none") {
-    defaultStackedBar({
-      svg: d3.select("#barchart")
-    });
+    defaultStackedBar(
+      d3.select("#barchart")
+    );
   } else {
-    stackedBar({
-      svg: d3.select("#barchart"),
-      wordsPerGenre: tfidf,
-      search: selectedVal,
-      textColor: d3.rgb(0,255,0,255),
-    });
+    var documents = getdocuments(); //alle Wörter
+    var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal
+    var tfidf = gettfidf(documents,wordList,useIDF,useStemm);
+    stackedBar(
+      d3.select("#barchart"),
+      tfidf,
+      selectedVal,
+      d3.rgb(0,255,0,255)
+    );
   }
 }
 searchNode();
 
+var documents = getdocuments(); //alle Wörter
+var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal
+var tfidf = gettfidf(documents,wordList,useIDF,useStemm);
 tagCloud(d3.select("#dots"), tfidf.slice(0, 3));
 
 
