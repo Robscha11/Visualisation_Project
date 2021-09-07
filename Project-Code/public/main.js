@@ -38,7 +38,9 @@ document.getElementById("button").onclick = function() {searchNode()};
 function searchNode() {
   var selectedVal = document.getElementById("search").value
   if (selectedVal == "none") {
-    console.log("nothing")
+    defaultStackedBar({
+      svg: d3.select("#barchart")
+    });
   } else {
     stackedBar({
       svg: d3.select("#barchart"),

@@ -25,19 +25,23 @@ export function stackedBar(svg, wordsPerGenre, search, textColor) {
       const genre = selection.property("value");
       const words = wordsPerGenre.get(genre).slice(0, 50);
 */
+const genre = Array.from(wordsPerGenre.keys());
 const data = wordsPerGenre.get(genre).slice(0, 50);
+console.log(data);
 
     svg.append("g")
     .attr("fill", "steelblue")
     .selectAll("rect")
-    .data(search)
+    .data(data)
     .join("rect")
     .attr("x", x(0))
     .attr("y", (d, i) => y(i))
-    .attr("width", d => x(d.text) - x(0))
-    .attr("height", y.bandwidth());
+    .attr("width", d => d.some(search) ? 1:0) //length of bar .attr("width", d => x(d.text) - x(0))
+    .attr("height", y.bandwidth());       //height of bar
 
-    svg.append("g")
+
+                                              //Text in jedem Bar (Wert)
+   /* svg.append("g")
     .attr("fill", "white")
     .attr("text-anchor", "end")
     .attr("font-family", "sans-serif")
@@ -53,7 +57,7 @@ const data = wordsPerGenre.get(genre).slice(0, 50);
     .call(text => text.filter(d => x(d.text) - x(0) < 20) // short bars
     .attr("dx", +4)
     .attr("fill", "black")
-    .attr("text-anchor", "start"));
+    .attr("text-anchor", "start"));*/
 
     svg.append("g")
     .call(xAxis);
@@ -62,27 +66,26 @@ const data = wordsPerGenre.get(genre).slice(0, 50);
     .call(yAxis);
 
     x = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.text)]) //search in text for "search"
-    .range([margin.left, width - margin.right])
+    .domain([0, d3.max(data, d => d.size)]) //höchster tdidf wert in datenset search in text for "search"
+    .range([0, width]);
 
     y = d3.scaleBand()
-    .domain(d3.range(data.length))
+    .domain(d3.range(Array.from(wordsPerGenre.keys())) //für jede Partei eine Leiste
     .rangeRound([margin.top, height - margin.bottom])
-    .padding(0.1)
+    .padding(0.1));
 
-      color = d3.scaleOrdinal()
-      .domain(series.map(d => d.key))
-      .range(d3.schemeSpectral[series.length])
-      .unknown("#ccc")
+    color = d3.scaleOrdinal()
+     .domain(d3.range(Array.from(wordsPerGenre.keys()))
+     .range(d3.schemeSpectral[Array.from(wordsPerGenre.keys().length)]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
+     .unknown("#ccc"));
 
      xAxis = g => g
       .attr("transform", `translate(0,${margin.top})`)
-      .call(d3.axisTop(x).ticks(width / 80, data.format))
-      .call(g => g.select(".domain").remove())
+      .call(d3.axisTop(x).ticks(width / 80, "s"))  // mal schauen was hier passiert
 
       yAxis = g => g
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
+    .call(d3.axisLeft(y).tickFormat(i => genre[i]).tickSizeOuter(0)); //Parteien als Legende vertikal
 
-  return svg.node();
+
 }
