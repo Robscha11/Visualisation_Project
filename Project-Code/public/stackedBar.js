@@ -1,6 +1,4 @@
 import * as d3 from "d3";
-import { rgb } from "d3";
-import cloud from "d3-cloud";
 
 export function stackedBar(svg, wordsPerGenre, search, textColor) {
     const width = 400;

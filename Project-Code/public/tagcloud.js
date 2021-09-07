@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 
 export function tagCloud(svg, wordvectors) {
-    const width = 1000;
-    const height = 600;
+    const width = 400;
+    const height = 300;
     const margin = { top: 100, right: 50, bottom: 30, left: 50 };
     const numWords = 15;
   
