@@ -8,6 +8,7 @@ import { stackedBar } from "./stackedBar";
 //update handler for IDF
 var useIDF = false;
 var useStemm = false;
+var useAllPartys = false;
 document.querySelector("#checkIDF").addEventListener("click", function(event) {
   useStemm = event.target.checked
   update()
@@ -16,12 +17,16 @@ document.querySelector("#checkStemm").addEventListener("click", function(event) 
   useIDF = event.target.checked
   update()
 });
+document.querySelector("#checkPartys").addEventListener("click", function(event) {
+  useAllPartys = event.target.checked
+  update() //für Final version documents Zeile 15 anzahl anpassen
+});
 
 update();
 function update(){
-  var documents = getdocuments(); //alle Wörter
+  var documents = getdocuments(useStemm,useAllPartys); //alle Wörter
   var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal  
-  var tfidf = gettfidf(documents,wordList,useIDF,useStemm);
+  var tfidf = gettfidf(documents,wordList,useIDF);
 
   //console.log(documents)
   //console.log(wordList)

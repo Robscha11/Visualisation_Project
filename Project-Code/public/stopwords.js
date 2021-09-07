@@ -1,4 +1,5 @@
 export let stopwords = `
+vgl
 st
 en
 wollen

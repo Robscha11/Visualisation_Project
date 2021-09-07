@@ -41,6 +41,8 @@ export function wordcloud({ svg, wordsPerGenre}) {
     .padding(5)
     .font("Impact")
     .rotate(0)
+    .random(function(d) { return 0.5; })
+    .spiral("archimedean")
     .fontSize(function (d) {
       return d.size;
     })
