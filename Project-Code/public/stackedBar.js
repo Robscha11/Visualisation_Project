@@ -42,12 +42,12 @@ var y = d3.scaleBand()
     .data(genre)
     .join("rect")
     .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * 25) + i*2)  //müsste je nach key runtergeschoben werden
+    .attr("y", (d,i) => ((i * 25) + i*2)+5)  //müsste je nach key runtergeschoben werden
     .attr("width", function(d) {
         var array = wordsPerGenre.get(d)
         for(var i = 0; i <= array.length -1; i++){
             if(array[i][0] == search){
-                console.log(array[i][1])
+                //console.log(array[i][1])
                 return x(array[i][1])
             }
         }

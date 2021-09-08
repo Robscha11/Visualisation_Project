@@ -12,7 +12,7 @@ WordFile.send(null);
 Parteien = Parteien.flat()
 
 if(!useAllPartys){
-  Parteien = Parteien.slice(0,3)
+  Parteien = Parteien.slice(0,7)
 }
 
 //alle Dateien auslesen 
