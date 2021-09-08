@@ -22,11 +22,15 @@ document.querySelector("#checkPartys").addEventListener("click", function(event)
   update() //für Final version documents Zeile 15 anzahl anpassen
 });
 
+var documents
+var wordList
+var tfidf
+
 update();
 function update(){
-  var documents = getdocuments(useStemm,useAllPartys); //alle Wörter
-  var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal  
-  var tfidf = gettfidf(documents,wordList,useIDF);
+  documents = getdocuments(useStemm,useAllPartys); //alle Wörter
+  wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal  
+  tfidf = gettfidf(documents,wordList,useIDF);
 
   //console.log(documents)
   //console.log(wordList)
@@ -43,14 +47,11 @@ document.getElementById("button").onclick = function() {searchNode()};
 function searchNode() {
   var selectedVal = document.getElementById("search").value
   console.log(selectedVal);
-  if (selectedVal == "none") {
+  if (selectedVal == "none" || "") {
     defaultStackedBar(
       d3.select("#barchart")
     );
   } else {
-    var documents = getdocuments(); //alle Wörter
-    var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal
-    var tfidf = gettfidf(documents,wordList,useIDF,useStemm);
     stackedBar(
       d3.select("#barchart"),
       tfidf,
@@ -59,11 +60,7 @@ function searchNode() {
     );
   }
 }
-searchNode();
 
-var documents = getdocuments(); //alle Wörter
-var wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal
-var tfidf = gettfidf(documents,wordList,useIDF,useStemm);
-tagCloud(d3.select("#dots"), tfidf.slice(0, 3));
+//tagCloud(d3.select("#dots"), tfidf.slice(0, 3));
 
 

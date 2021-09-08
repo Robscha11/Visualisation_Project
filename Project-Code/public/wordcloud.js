@@ -53,11 +53,11 @@ export function wordcloud({ svg, wordsPerGenre}) {
   selectP2.on("change", update);
   function update() {
     genre1 = selectP1.property("value");
-    const words1 = wordsPerGenre.get(genre1).slice(0, 2);
+    const words1 = wordsPerGenre.get(genre1).slice(0, 50);
     size1.domain(d3.extent(words1, (d) => d[1]));
 
     genre2 = selectP2.property("value");
-    const words2 = wordsPerGenre.get(genre2).slice(0, 2);
+    const words2 = wordsPerGenre.get(genre2).slice(0, 50);
     size2.domain(d3.extent(words2, (d) => d[1]));
 
     var words = [];

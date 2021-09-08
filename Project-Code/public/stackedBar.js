@@ -27,15 +27,33 @@ const genre = Array.from(wordsPerGenre.keys());
 const data = wordsPerGenre.get(genre[0]).slice(0, 50);
 console.log(data);
 
+var x = d3.scaleLinear()
+    .domain([0, 1]) //höchster tdidf wert in datenset search in text for "search"
+    .range([0, width]);
+
+var y = d3.scaleBand()
+.domain(d3.range(Array.from(wordsPerGenre.keys()))) //für jede Partei eine Leiste
+.rangeRound([30, height - 10])
+.padding(0.1);
+
     svg.append("g")
     .attr("fill", "steelblue")
     .selectAll("rect")
-    .data(data)
+    .data(genre)
     .join("rect")
-    .attr("x", 30)    //x(0)
-    .attr("y", (d, i) => y(i))
-    .attr("width", d => d.text.some(item => item === search) ? d.size[d.text.indexOf(search)] : 0) //length of bar .attr("width", d => x(d.text) - x(0))
-    .attr("height", 23);       //height of bar y.bandwidth()
+    .attr("x", 0)    //x(0) der kann so bleiben
+    .attr("y", (d,i) => (i * 25) + i*2)  //müsste je nach key runtergeschoben werden
+    .attr("width", function(d) {
+        var array = wordsPerGenre.get(d)
+        for(var i = 0; i <= array.length -1; i++){
+            if(array[i][0] == search){
+                console.log(array[i][1])
+                return x(array[i][1])
+            }
+        }
+        return 0
+    })
+    .attr("height", 25);       //height of bar y.bandwidth()
 
 
                                               //Text in jedem Bar (Wert)
@@ -57,33 +75,23 @@ console.log(data);
     .attr("fill", "black")
     .attr("text-anchor", "start"));*/
 
+    
     svg.append("g")
     .call(xAxis);
 
     svg.append("g")
     .call(yAxis);
 
-    x = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.size)]) //höchster tdidf wert in datenset search in text for "search"
-    .range([0, width]);
+    
 
-    y = d3.scaleBand()
-    .domain(d3.range(Array.from(wordsPerGenre.keys())) //für jede Partei eine Leiste
-    .rangeRound([margin.top, height - margin.bottom])
-    .padding(0.1));
+
 
     color = d3.scaleOrdinal()
      .domain(d3.range(Array.from(wordsPerGenre.keys()))
      .range(d3.schemeSpectral[Array.from(wordsPerGenre.keys().length)]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
      .unknown("#ccc"));
 
-     xAxis = g => g
-      .attr("transform", `translate(0,${margin.top})`)
-      .call(d3.axisTop(x).ticks(width / 80, "s"))  // mal schauen was hier passiert
 
-      yAxis = g => g
-    .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).tickFormat(i => genre[i]).tickSizeOuter(0)); //Parteien als Legende vertikal
 
 
 }
