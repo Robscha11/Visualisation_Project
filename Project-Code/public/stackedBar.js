@@ -32,10 +32,10 @@ console.log(data);
     .selectAll("rect")
     .data(data)
     .join("rect")
-    //.attr("x", x(0))
-    //.attr("y", (d, i) => y(i))
-    .attr("width", d => d.find(search) ? 1:0) //length of bar .attr("width", d => x(d.text) - x(0))
-    .attr("height", y.bandwidth());       //height of bar
+    .attr("x", 30)    //x(0)
+    .attr("y", (d, i) => y(i))
+    .attr("width", d => d.text.some(item => item === search) ? d.size[d.text.indexOf(search)] : 0) //length of bar .attr("width", d => x(d.text) - x(0))
+    .attr("height", 23);       //height of bar y.bandwidth()
 
 
                                               //Text in jedem Bar (Wert)
