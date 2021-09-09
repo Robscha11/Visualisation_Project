@@ -29,6 +29,7 @@ h1 {
   font-size: 3rem;
   font-weight: 400;
   margin: 3rem 0 1rem 0;
+  text-align: center;
 }
 
 h2 {
@@ -73,8 +74,13 @@ span.monospace {
   font-family: monospace;
 }
 
-/*svg {
-  background-color: rgb(63, 66, 18);
-}*/
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
+h2#loading {
+  background-color: #eb1212;
+  text-align: center;
+}
 

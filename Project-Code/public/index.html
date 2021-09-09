@@ -8,41 +8,76 @@
   <link rel="stylesheet" type="text/css" href="/index.css" />
   <title>Election Program Visualization</title>
 
-  <style>
-    circle {
-      fill: black;
-    }
-
-    .boxplot {
-      stroke: black;
-    }
-  </style>
-
 </head>
 
 <body>
   <main>
-    <h1>Visualization Project SS21</h1>
-    <h2>Exercise 1</h2>
+    <h1>Comparison of the election programs of the parties for the 2021 german federal election.</h1>
 
     <section>
-      <h3>Word Clouds</h3>
+      <h2>INTRODUCTION</h2>
+      <p>
+        Hier was als Intro schreiben
+      </p>
+
+      <h2>OPTIONS</h2>
+      <p>
+        In the following, various options can be used that can also change the results. Since the calculations are very complex, loading times can be long.
+      </p>
+<table>
+  <tr>
+    <h2 id="loading"></h2>
+  </tr>
+      <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkPartys" name="checkPartys" value=1>
+          <label for="checkPartys"> all Parties</label>
+        </td>
+        <td width="80%">
+          At the beginning only the election programs of the parties currently represented 
+          in the Bundestag are considered. If you want to see all parties that are eligible 
+          for election in the constituency (Erfurt - Weimar - Weimarer Land II (constituency 193)), 
+          please tick the box.
+        </td>
+       </tr>
+       <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkIDF" name="checkIDF" value=1>
+          <label for="checkIDF"> IDF</label>
+        </td>
+        <td width="80%">
+          At the beginning only the frequency of the words within an election program is calculated. (Term Frequency) 
+          With the selection of Inverse Document Frequency (IDF), the occurrence of a word in all election programs is 
+          taken into account. Words that only appear in a few election programs are considered more important than words 
+          that are represented in all documents.
+        </td>
+       </tr>
+       <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkStemm" name="checkStemm" value=1>
+          <label for="checkStemm"> Stemming</label>
+        </td>
+        <td width="80%">
+          Stemming or the normal form reduction should help to convert the words to their normal form. 
+          Since there can be many changes to a root word in the German language, this function was implemented. 
+          Unfortunately, this only works to a limited extent here. For the sake of interest, however, 
+          this function was retained and made available as an option.
+        </td>
+       </tr></table>
+
+    </section>
+
+
+
+    <section>
+      <h2>COMPARISON CLOUD</h2>
       <p>A Word Cloud is a nice, yet imprecise way to have a look at the textual contents
           of our data. To get an overview of the movies in our movie database, we will create
           one Word Cloud per genre based on the movie descriptions.
       </p>
-
-      <input type="checkbox" id="checkPartys" name="checkPartys" value=1>
-      <label for="checkPartys"> all Partys?</label><br>
-      <input type="checkbox" id="checkIDF" name="checkIDF" value=1>
-      <label for="checkIDF"> idf</label><br>
-      <input type="checkbox" id="checkStemm" name="checkStemm" value=1>
-      <label for="checkStemm"> Stemming</label><br>
-
-      </br>
       <select style="background-color:rgb(225,190,106)" id="party1"></select></svg>
-      <select style="background-color:rgb(64,176,166)" id="party2"></select></br>
-
+      <select style="background-color:rgb(64,176,166)" id="party2"></select>
+      <h2></h2>
       <svg id="wordcloud"></svg>
         
     </section>
@@ -72,6 +107,7 @@
       <svg id="dots2"></svg>
       <svg id="dots3"></svg>
       <svg id="dots4"></svg>
+      <svg id="dots5"></svg>
   </section>
 
   </main>

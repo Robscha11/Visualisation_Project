@@ -48,6 +48,13 @@ if(partys.length == 7){
     wordvectors.push({title: p[i], wordvector: tfidf.get(p[i])})
   }
   create(svg)
+  svg = d3.select("#dots5")
+  wordvectors = []
+  p = partys.slice(16,20)
+  for(var i = 0; i <= p.length -1; i++){
+    wordvectors.push({title: p[i], wordvector: tfidf.get(p[i])})
+  }
+  create(svg)
 }
 
 function create(svg){

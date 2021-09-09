@@ -12,7 +12,7 @@ WordFile.send(null);
 Parteien = Parteien.flat()
 
 if(!useAllPartys){
-  Parteien = Parteien.slice(0,7)
+  Parteien = Parteien.slice(0,2)
 }
 
 //alle Dateien auslesen 
@@ -31,7 +31,7 @@ function getWords (name){
   WordFile.send(null);
 
   //paar sachen rausfiltern --- reihenfolge ist wichtig glaube ich
-  var splitChar = ["\n","\t","\b","\f",".","\u0007",",",":","!","˵","˝","»","(",")","?"]; //Anführungszeichen entfernen (hat das funktioniert?)
+  var splitChar = ["\n","\t","\b","\f",".","\u0007",",",":","!","˵","˝","»","(",")","?","//"]; //Anführungszeichen entfernen (hat das funktioniert?)
   for(var i = 0; i <= splitChar.length-1; i++){
     var buffer = [];
     Words.forEach(d => d.forEach(d => buffer.push(d.split(`${splitChar[i]}`))))
