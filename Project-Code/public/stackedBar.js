@@ -76,7 +76,7 @@ var y = d3.scaleBand()
     .attr("text-anchor", "start"));*/
 
     
-    svg.append("g")
+    /*svg.append("g")
     .call(xAxis);
 
     svg.append("g")
@@ -91,7 +91,7 @@ var y = d3.scaleBand()
      .range(d3.schemeSpectral[Array.from(wordsPerGenre.keys().length)]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
      .unknown("#ccc"));
 
-
+*/
 
 
 }

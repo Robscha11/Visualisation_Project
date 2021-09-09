@@ -32,7 +32,7 @@ var tfidf
 
 update();
 function update(){
-  //d3.select("#loading").text("hallo")
+  d3.select("#loading").style("visibility","visible")
   console.log("UPDATING: PLEASE WAIT")
   documents = getdocuments(useStemm,useAllPartys); //alle Wörter
   wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal  
@@ -51,9 +51,10 @@ function update(){
   d3.select("#dots2").selectAll("*").remove();
   d3.select("#dots3").selectAll("*").remove();
   d3.select("#dots4").selectAll("*").remove();
+  d3.select("#dots5").selectAll("*").remove();
   tagCloud(tfidf);
   console.log("UPDATING: FINISHED")
-  //d3.select("#loading").selectAll("*").remove();
+  d3.select("#loading").style("visibility","hidden")
 }
 
 

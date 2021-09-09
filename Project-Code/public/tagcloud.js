@@ -4,7 +4,7 @@ export function tagCloud(tfidf) {
 var svg
 var partys = Array.from(tfidf.keys())
 
-if(partys.length == 7){
+if(partys.length <= 7){
   svg = d3.select("#dots1")
   var wordvectors = []
   var p = partys.slice(0,4)
