@@ -33,16 +33,21 @@ var x = d3.scaleLinear()
 
 var y = d3.scaleBand()
 .domain(d3.range(Array.from(wordsPerGenre.keys()))) //für jede Partei eine Leiste
-.rangeRound([30, height - 10])
 .padding(0.1);
 
+var color = d3.scaleOrdinal()
+     //.domain(d3.range(genre))
+     .range(d3.schemeSpectral[genre.length]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
+
+     var barColor = d3.interpolateInferno(0.4);
+
     svg.append("g")
-    .attr("fill", "steelblue")
     .selectAll("rect")
     .data(genre)
+    .attr("fill", barColor)
     .join("rect")
     .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * 25) + i*2)  //müsste je nach key runtergeschoben werden
+    .attr("y", (d,i) => (i * 25))  //müsste je nach key runtergeschoben werden
     .attr("width", function(d) {
         var array = wordsPerGenre.get(d)
         for(var i = 0; i <= array.length -1; i++){
@@ -57,39 +62,87 @@ var y = d3.scaleBand()
 
 
                                               //Text in jedem Bar (Wert)
-   /* svg.append("g")
+   svg.append("g")
     .attr("fill", "white")
     .attr("text-anchor", "end")
     .attr("font-family", "sans-serif")
     .attr("font-size", 12)
     .selectAll("text")
-    .data(data)
+    .data(genre)
     .join("text")
-    .attr("x", d => x(d.size))
-    .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
+    .attr("x", 0)    //x(0) der kann so bleiben
+    .attr("y", (d,i) => (i * 25))  //müsste je nach key runtergeschoben werden
     .attr("dy", "0.35em")
     .attr("dx", -4)
-    .text(d => format(d.size))
-    .call(text => text.filter(d => x(d.text) - x(0) < 20) // short bars
+    .text(d => d)
+    //.call(text) // short bars
     .attr("dx", +4)
     .attr("fill", "black")
-    .attr("text-anchor", "start"));*/
+    .attr("text-anchor", "start");
+
+  
+
+  // Y axis
+
+var yRange = d3.scaleLinear()
+  .range([0, genre.length * 25]);
+
+var formatPercent = d3.format(".0%");        
+
+var yAxis = d3.axisLeft()
+        .scale(yRange)
+        .tickFormat(formatPercent);
+        
+var y_xis = svg.append('g')
+        //.attr('id','yaxis')
+        .call(yAxis);
+
+
+// X axis
+ var scale = d3.scaleLinear()
+        .domain([d3.min(data), d3.max(data)])  // von 0 - 1
+        .range([0, width - 10]);
+
+var x_axis = d3.axisBottom()
+        .scale(scale)
+        .tickSize([5]).tickPadding(10);
+
+svg.append("g")
+        //.attr("transform", "translate(0," + height + ")")
+        .call(x_axis);
+
+
+//CDU CSU SPD AFD FDP DIE-LINKE DIE-GRUENEN BGE FREIE-WÄHLER ÖDP Piratenpartei SSW Tierschutzpartei VOLT
+        // für Parteifarben
+        //.attr("fill", function(d, i){
+        //    if(d.name == 'Walnuts') {return 'red'} else {return 'green'}
+        //                              });
+
+
+                                      /* Blau: CSU, AFD, BGE, SSW
+                                        Schwarz-Weiß-Rot: Die Partei
+                                        Gelb: FDP
+                                        Grün: Die Grünen
+                                        Orange: Piratenpartei, ÖDP, Freie Wähler
+                                        Rot: Die Linke, SPD, CDU
+                                        Violett: Volt
+                                        Schwarz: CSU+CDU
+                                        Bunt: Tierschutzpartei
+                                        
+//https://www.tutorialsteacher.com/d3js/animated-bar-chart-d3
+
+//animation bar chart
+//https://www.d3-graph-gallery.com/graph/barplot_animation_start.html
+
+
+// Werte auf bar chart
+//https://bl.ocks.org/bytesbysophie/952a1003dd188410e9c6262b68a65f9a
+*/
+    
+
+
 
     
-    svg.append("g")
-    .call(xAxis);
-
-    svg.append("g")
-    .call(yAxis);
-
-    
-
-
-
-    color = d3.scaleOrdinal()
-     .domain(d3.range(Array.from(wordsPerGenre.keys()))
-     .range(d3.schemeSpectral[Array.from(wordsPerGenre.keys().length)]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
-     .unknown("#ccc"));
 
 
 
