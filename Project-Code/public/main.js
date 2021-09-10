@@ -5,15 +5,19 @@ import { gettfidf } from "./tfidf";
 import { wordcloud } from "./wordcloud";
 import { stackedBar } from "./stackedBar";
 import { tagCloud } from "./tagcloud";
+import { defaultStackedBar } from "./defaultStackedBar";
 
 //update handler 
 var useIDF = false;
 var useStemm = false;
 var useAllPartys = false;
+
+
+
 document.querySelector("#checkIDF").addEventListener("click", function(event) {
   useStemm = event.target.checked
   update()
-});
+}); 
 document.querySelector("#checkStemm").addEventListener("click", function(event) {
   useIDF = event.target.checked
   update()
@@ -31,6 +35,7 @@ var wordList
 var tfidf
 
 update();
+
 function update(){
   d3.select("#loading").style("visibility","visible")
   console.log("UPDATING: PLEASE WAIT")
@@ -58,20 +63,19 @@ function update(){
 }
 
 
+defaultStackedBar(d3.select("#barchart"));
 
 function searchNode() {
-  var selectedVal = document.getElementById("search").value
-  console.log(selectedVal);
-  if (selectedVal == "none" || "") {
-    defaultStackedBar(
-      d3.select("#barchart")
-    );
-  } else {
+  var selectedVal = document.getElementById("search").value.toLowerCase();
+  if (selectedVal === "none" || "") {
+    alert("Fill me!");
+  }
+  else {
+    d3.select("#barchart").selectAll("*").remove();
     stackedBar(
       d3.select("#barchart"),
       tfidf,
       selectedVal,
-      d3.rgb(0,255,0,255)
     );
   }
 }

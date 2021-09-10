@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-export function stackedBar(svg, wordsPerGenre, search, textColor) {
+export function stackedBar(svg, wordsPerGenre, search) {
     const width = 400;
     const height = 400;
     svg.attr("viewBox", [0, 0, width, height]);
@@ -35,19 +35,18 @@ var y = d3.scaleBand()
 .domain(d3.range(Array.from(wordsPerGenre.keys()))) //für jede Partei eine Leiste
 .padding(0.1);
 
+var barHeight = 25;
+
 var color = d3.scaleOrdinal()
      //.domain(d3.range(genre))
-     .range(d3.schemeSpectral[genre.length]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
-
-     var barColor = d3.interpolateInferno(0.4);
+     .range(d3.schemeRdBu[genre.length]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
 
     svg.append("g")
     .selectAll("rect")
     .data(genre)
-    .attr("fill", barColor)
     .join("rect")
     .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * 25))  //müsste je nach key runtergeschoben werden
+    .attr("y", (d,i) => (i * barHeight))  //müsste je nach key runtergeschoben werden
     .attr("width", function(d) {
         var array = wordsPerGenre.get(d)
         for(var i = 0; i <= array.length -1; i++){
@@ -58,7 +57,8 @@ var color = d3.scaleOrdinal()
         }
         return 0
     })
-    .attr("height", 25);       //height of bar y.bandwidth()
+    .attr("height", barHeight)       //height of bar y.bandwidth()
+    .attr("fill", color);
 
 
                                               //Text in jedem Bar (Wert)
@@ -66,12 +66,12 @@ var color = d3.scaleOrdinal()
     .attr("fill", "white")
     .attr("text-anchor", "end")
     .attr("font-family", "sans-serif")
-    .attr("font-size", 12)
+    .attr("font-size", 6)
     .selectAll("text")
     .data(genre)
     .join("text")
     .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * 25))  //müsste je nach key runtergeschoben werden
+    .attr("y", (d,i) => (i * barHeight + barHeight/2))  //müsste je nach key runtergeschoben werden
     .attr("dy", "0.35em")
     .attr("dx", -4)
     .text(d => d)
@@ -85,13 +85,12 @@ var color = d3.scaleOrdinal()
   // Y axis
 
 var yRange = d3.scaleLinear()
-  .range([0, genre.length * 25]);
-
-var formatPercent = d3.format(".0%");        
+  .range([0, genre.length * 25]);  
+  
+var formatPercent = d3.format(".0%");
 
 var yAxis = d3.axisLeft()
         .scale(yRange)
-        .tickFormat(formatPercent);
         
 var y_xis = svg.append('g')
         //.attr('id','yaxis')
@@ -100,15 +99,15 @@ var y_xis = svg.append('g')
 
 // X axis
  var scale = d3.scaleLinear()
-        .domain([d3.min(data), d3.max(data)])  // von 0 - 1
-        .range([0, width - 10]);
+        .domain([0, 1])  // von 0 - 1
+        .range([0, width]);
 
 var x_axis = d3.axisBottom()
         .scale(scale)
-        .tickSize([5]).tickPadding(10);
+        .tickSize([2]).tickPadding(10).tickFormat(formatPercent);
 
 svg.append("g")
-        //.attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + barHeight*genre.length + ")")
         .call(x_axis);
 
 
