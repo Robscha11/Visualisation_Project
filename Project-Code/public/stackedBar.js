@@ -104,7 +104,7 @@ var y_xis = svg.append('g')
 
 var x_axis = d3.axisBottom()
         .scale(scale)
-        .tickSize([2]).tickPadding(10).tickFormat(formatPercent);
+        .tickSize([3]).tickPadding(10).tickFormat(formatPercent);
 
 svg.append("g")
         .attr("transform", "translate(0," + barHeight*genre.length + ")")
