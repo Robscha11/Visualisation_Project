@@ -4,8 +4,9 @@ import { getWordList } from "./wordList";
 import { gettfidf } from "./tfidf";
 import { wordcloud } from "./wordcloud";
 import { stackedBar } from "./stackedBar";
+import { tagCloud } from "./tagcloud";
 
-//update handler for IDF
+//update handler 
 var useIDF = false;
 var useStemm = false;
 var useAllPartys = false;
@@ -21,6 +22,9 @@ document.querySelector("#checkPartys").addEventListener("click", function(event)
   useAllPartys = event.target.checked
   update() //für Final version documents Zeile 15 anzahl anpassen
 });
+document.getElementById("button").onclick = function() {
+  searchNode()
+};
 
 var documents
 var wordList
@@ -28,6 +32,8 @@ var tfidf
 
 update();
 function update(){
+  d3.select("#loading").style("visibility","visible")
+  console.log("UPDATING: PLEASE WAIT")
   documents = getdocuments(useStemm,useAllPartys); //alle Wörter
   wordList = getWordList(documents); //jedes wort pro Partei nur EIN mal  
   tfidf = gettfidf(documents,wordList,useIDF);
@@ -40,9 +46,18 @@ function update(){
     svg: d3.select("#wordcloud"),
     wordsPerGenre: tfidf,
   });
+
+  d3.select("#dots1").selectAll("*").remove();
+  d3.select("#dots2").selectAll("*").remove();
+  d3.select("#dots3").selectAll("*").remove();
+  d3.select("#dots4").selectAll("*").remove();
+  d3.select("#dots5").selectAll("*").remove();
+  tagCloud(tfidf);
+  console.log("UPDATING: FINISHED")
+  d3.select("#loading").style("visibility","hidden")
 }
 
-document.getElementById("button").onclick = function() {searchNode()};
+
 
 function searchNode() {
   var selectedVal = document.getElementById("search").value
@@ -61,6 +76,6 @@ function searchNode() {
   }
 }
 
-//tagCloud(d3.select("#dots"), tfidf.slice(0, 3));
+
 
 

@@ -65,7 +65,7 @@ export function wordcloud({ svg, wordsPerGenre}) {
       words.push(({ text: words1[i][0], size: size1(words1[i][1]), key: genre1  }))
       words.push(({ text: words2[i][0], size: size2(words2[i][1]), key: genre2  }))
     }
-    console.log(words)
+    //console.log(words)
     
     layout.words(words);
     layout.start();

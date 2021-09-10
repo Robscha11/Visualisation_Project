@@ -29,6 +29,7 @@ h1 {
   font-size: 3rem;
   font-weight: 400;
   margin: 3rem 0 1rem 0;
+  text-align: center;
 }
 
 h2 {
@@ -53,15 +54,6 @@ span.tag {
   justify-content: center;
 }
 
-code {
-  font-family: monospace;
-  font-size: 1.1rem;
-  background-color: #B0BEC5;
-  color: black;
-  border-radius: 4px;
-  padding: 0.1rem 0.2rem;
-}
-
 div.task {
   padding: 0.1rem 1.2rem;
   margin: 2rem 0;
@@ -73,8 +65,22 @@ span.monospace {
   font-family: monospace;
 }
 
-/*svg {
-  background-color: rgb(63, 66, 18);
-}*/
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
+h2#loading {
+  background-color: #eb1212;
+  text-align: center;
+}
+
+section{
+  background-color: #2d3542;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 30px;
+}
 

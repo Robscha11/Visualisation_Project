@@ -52,7 +52,7 @@ var color = d3.scaleOrdinal()
         var array = wordsPerGenre.get(d)
         for(var i = 0; i <= array.length -1; i++){
             if(array[i][0] == search){
-                console.log(array[i][1])
+                //console.log(array[i][1])
                 return x(array[i][1])
             }
         }

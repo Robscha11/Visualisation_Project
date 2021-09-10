@@ -1,4 +1,6 @@
 export let stopwords = `
+www
+îî
 vgl
 st
 en
