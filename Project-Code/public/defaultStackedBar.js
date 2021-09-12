@@ -8,12 +8,12 @@ export function defaultStackedBar(svg) {
     const g = svg
     .append("text")
     .attr("text-anchor", "end")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 15)
-    .attr("x", 130)
+    .attr("font-family", "Impact")
+    .attr("font-size", 10)
+    .attr("x", 70)
     .attr("y", 10)
     .attr("dy", "+.35em")
     .attr("dx", "+.35em")
     .attr("fill", "white")
-    .text("Search for Keyword");
+    .text("Insert a Keyword");
 }
