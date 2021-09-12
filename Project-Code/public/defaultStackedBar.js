@@ -1,11 +1,11 @@
 import * as d3 from "d3";
 
 export function defaultStackedBar(svg) {
-    const width = 400;
-    const height = 30;
-    svg.attr("viewBox", [0, 0, width, height]);
+  const width = 400;
+  const height = 30;
+  svg.attr("viewBox", [0, 0, width, height]);
 
-    const g = svg
+  const g = svg
     .append("text")
     .attr("text-anchor", "end")
     .attr("font-family", "Impact")
