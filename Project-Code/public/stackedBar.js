@@ -9,30 +9,16 @@ export function stackedBar(svg, wordsPerGenre, search) {
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-     const size = d3.scaleLinear().range([10, 50]).domain([0,1]);
-     //const scaleOpacity = d3.scaleLinear().range([0.1, 1]).domain([10,50]);
-
-     // fill the select
-     /*
-     selection
-      .selectAll("option")
-      .data(Array.from(wordsPerGenre.keys()))
-      .join("option")
-      .text((d) => d);
-
-      const genre = selection.property("value");
-      const words = wordsPerGenre.get(genre).slice(0, 50);
-*/
 const genre = Array.from(wordsPerGenre.keys());
 const data = wordsPerGenre.get(genre[0]).slice(0, 50);
-console.log(data);
 
 var x = d3.scaleLinear()
     .domain([0, 1]) //höchster tdidf wert in datenset search in text for "search"
-    .range([0, width]);
+    .range([50, width-50]);
 
 var y = d3.scaleBand()
 .domain(d3.range(Array.from(wordsPerGenre.keys()))) //für jede Partei eine Leiste
+.range([0, height])
 .padding(0.1);
 
 var barHeight = 25;
@@ -45,22 +31,33 @@ var color = d3.scaleOrdinal()
     .selectAll("rect")
     .data(genre)
     .join("rect")
-    .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * barHeight))  //müsste je nach key runtergeschoben werden
-    .attr("width", function(d) {
-        var array = wordsPerGenre.get(d)
-        for(var i = 0; i <= array.length -1; i++){
-            if(array[i][0] == search){
-                //console.log(array[i][1])
-                return x(array[i][1])
-            }
-        }
-        return 0
-    })
+    .attr("x", 50)    //x(0) der kann so bleiben
+    .attr("y", function(d,i) { return (i * barHeight) +10; })//.attr("y", (d,i) => (i * barHeight) +10)  //müsste je nach key runtergeschoben werden
+    .attr("width", 0)
     .attr("height", barHeight)       //height of bar y.bandwidth()
     .attr("fill", color);
 
+var container = [];
 
+    svg.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("width", function(d) {
+            var array = wordsPerGenre.get(d)
+            for(var i = 0; i <= array.length -1; i++){
+                if(array[i][0] == search){
+                    //console.log(array[i][1])
+                    container.push(x(array[i][1]));
+                    return x(array[i][1])
+                }
+            }
+            return 0
+        })
+        .delay(function(d,i){console.log(i) ; return(i*100)});
+        
+        if(container.every(item => item === 0)) { 
+                alert(search + " does not exist in any election program, try another word!");
+            }
                                               //Text in jedem Bar (Wert)
    svg.append("g")
     .attr("fill", "white")
@@ -70,8 +67,8 @@ var color = d3.scaleOrdinal()
     .selectAll("text")
     .data(genre)
     .join("text")
-    .attr("x", 0)    //x(0) der kann so bleiben
-    .attr("y", (d,i) => (i * barHeight + barHeight/2))  //müsste je nach key runtergeschoben werden
+    .attr("x", 50)    //x(0) der kann so bleiben
+    .attr("y", (d,i) => (i * barHeight + barHeight/2) + 10)  //müsste je nach key runtergeschoben werden
     .attr("dy", "0.35em")
     .attr("dx", -4)
     .text(d => d)
@@ -83,7 +80,6 @@ var color = d3.scaleOrdinal()
   
 
   // Y axis
-
 var yRange = d3.scaleLinear()
   .range([0, genre.length * 25]);  
   
@@ -91,23 +87,28 @@ var formatPercent = d3.format(".0%");
 
 var yAxis = d3.axisLeft()
         .scale(yRange)
+        .tickValues([])
+        .tickSize([3])
+        .tickFormat("");
         
 var y_xis = svg.append('g')
-        //.attr('id','yaxis')
+        .style("font", "8px times")
+        .attr("transform", "translate(50," + 10 + ")")
         .call(yAxis);
 
 
 // X axis
  var scale = d3.scaleLinear()
         .domain([0, 1])  // von 0 - 1
-        .range([0, width]);
+        .range([50, width-50]);
 
 var x_axis = d3.axisBottom()
         .scale(scale)
         .tickSize([3]).tickPadding(10).tickFormat(formatPercent);
 
 svg.append("g")
-        .attr("transform", "translate(0," + barHeight*genre.length + ")")
+        .style("font", "8px times")
+        .attr("transform", "translate(0," + (barHeight*genre.length+10) + ")")
         .call(x_axis);
 
 
