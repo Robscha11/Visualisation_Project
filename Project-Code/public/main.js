@@ -67,17 +67,19 @@ defaultStackedBar(d3.select("#barchart"));
 
 function searchNode() {
   var selectedVal = document.getElementById("search").value.toLowerCase();
-  if (selectedVal === "none" || "") {
+  
+  /*if (selectedVal == "none" || "") {
+    console.log(selectedVal);
     alert("Fill me!");
-  }
-  else {
+  }*/
+  //else {
     d3.select("#barchart").selectAll("*").remove();
     stackedBar(
       d3.select("#barchart"),
       tfidf,
       selectedVal,
     );
-  }
+  //}
 }
 
 
