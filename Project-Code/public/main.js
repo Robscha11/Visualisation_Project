@@ -61,37 +61,32 @@ function update() {
   console.log("UPDATING: FINISHED");
 }
 
+//show text to search for keywords
 defaultStackedBar(d3.select("#barchart"));
 
+//create bar chart
 function searchNode() {
   var selectedVal = document.getElementById("search").value.toLowerCase();
-
-  /*if (selectedVal == "none" || "") {
-    console.log(selectedVal);
-    alert("Fill me!");
-  }*/
-  //else {
   
   d3.select("#barchart").selectAll("*").remove();
-  const genre = Array.from(tfidf.keys());
-  stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
+  const sortedPartys = Array.from(tfidf.keys());
+  stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartys);
   //}
   d3.select("#byValue").on("click", function() {
-    genre.sort(function(a,b) {
-        var array = tfidf.get(a)
-            for(var i = 0; i <= array.length -1; i++){
-            if(array[i][0] == search){
-        return d3.descending(tfidf.get(a)[i][1], tfidf.get(b)[i][1]) }}
+    sortedPartys.sort(function(a,b,i) {
+        
+        return d3.descending(tfidf.get(a)[a][1], tfidf.get(b)[b][1]) 
       })
+      console.log(sortedPartys)
       d3.select("#barchart").selectAll("*").remove();
-      stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
+      stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartys);
     })
   
     d3.select("#byName").on("click", function() {
-      genre.sort(function(a, b) {
+      sortedPartys.sort(function(a, b) {
           return d3.ascending(a, b)
         })
         d3.select("#barchart").selectAll("*").remove();
-        stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
+        stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartys);
       })
 }

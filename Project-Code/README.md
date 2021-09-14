@@ -1,6 +1,5 @@
-# Visualization Lab Class
+# Visualization Project
 
-Run `npm install` to install the required packages.
-During development run `npm run dev` to locally serve the site and automatically refresh it on file changes.
-
-Run `npm run format` to format all JavaScript files.
+The content of the webpage is developed as a student project for the course "Visualisation". 
+The goal is to get quick insights about the content of the election programs of the parties 
+for the 2021 german federal election.

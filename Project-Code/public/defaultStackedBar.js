@@ -5,6 +5,7 @@ export function defaultStackedBar(svg) {
   const height = 30;
   svg.attr("viewBox", [0, 0, width, height]);
 
+  //default text until first search started
   const g = svg
     .append("text")
     .attr("text-anchor", "end")
