@@ -71,6 +71,17 @@ genre.sort(function(a,b) {
     .transition()
     .duration(500)
     .attr("y", function(d,i) { return (i * barHeight) +10; })
+    .attr("width", function(d) {
+        var array = wordsPerGenre.get(d)
+        for(var i = 0; i <= array.length -1; i++){
+            if(array[i][0] == search){
+                //console.log(array[i][1])
+                container.push(x(array[i][1]));
+                return x(array[i][1])
+            }
+        }
+        return 0
+    })
 
   svg.selectAll("text")
   .attr("y", (d,i) => (i * barHeight + barHeight/2) + 10)
@@ -85,6 +96,17 @@ d3.select("#byName").on("click", function() {
         .transition()
         .duration(500)
         .attr("y", function(d,i) { return (i * barHeight) +10; })
+        .attr("width", function(d) {
+            var array = wordsPerGenre.get(d)
+            for(var i = 0; i <= array.length -1; i++){
+                if(array[i][0] == search){
+                    //console.log(array[i][1])
+                    container.push(x(array[i][1]));
+                    return x(array[i][1])
+                }
+            }
+            return 0
+        })
 
       svg.selectAll("text")
       .attr("y", (d,i) => (i * barHeight + barHeight/2) + 10)
