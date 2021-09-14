@@ -3,8 +3,6 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="/index.css" />
   <title>Election Program Visualization</title>
 
@@ -28,9 +26,6 @@
         In the following, various options can be used that can also change the results. Since the calculations are very complex, loading times can be long.
       </p>
 <table>
-  <tr>
-    <h2 id="loading">Loading</h2>
-  </tr>
       <tr>
         <td width="20%">
           <input type="checkbox" id="checkPartys" name="checkPartys" value=1>
@@ -80,7 +75,7 @@
       <select style="background-color:rgb(225,190,106)" id="party1"></select></svg>
       <select style="background-color:rgb(64,176,166)" id="party2"></select>
       <h2></h2>
-      <svg id="wordcloud"></svg>
+      <svg id="compcloud"></svg>
         
     </section>
 
@@ -105,13 +100,13 @@
     <section>
           <h2>MOSTLY USED WORDS</h2>
           <p>
-            Here you can see the three most used words of the parties.
+            Here are the three most commonly used words per party.
           </p>
-      <svg id="dots1"></svg>
-      <svg id="dots2"></svg>
-      <svg id="dots3"></svg>
-      <svg id="dots4"></svg>
-      <svg id="dots5"></svg>
+      <svg id="words1"></svg>
+      <svg id="words2"></svg>
+      <svg id="words3"></svg>
+      <svg id="words4"></svg>
+      <svg id="words5"></svg>
   </section>
 
   </main>
