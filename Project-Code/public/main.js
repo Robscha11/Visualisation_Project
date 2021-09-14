@@ -40,7 +40,6 @@ var tfidf;
 update();
 
 function update() {
-  d3.select("#loading").style("visibility", "visible");
   console.log("UPDATING: PLEASE WAIT");
   //updating words
   documents = getdocuments(useStemm, useAllPartys); //all words
@@ -58,7 +57,6 @@ function update() {
   tagCloud(tfidf);
 
   console.log("UPDATING: FINISHED");
-  d3.select("#loading").style("visibility", "hidden");
 }
 
 defaultStackedBar(d3.select("#barchart"));
