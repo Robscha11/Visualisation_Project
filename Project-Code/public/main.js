@@ -78,13 +78,13 @@ function searchNode() {
   //}
   d3.select("#byValue").on("click", function() {
     genre.sort(function(a,b) {
-        var array = wordsPerGenre.get(a)
+        var array = tfidf.get(a)
             for(var i = 0; i <= array.length -1; i++){
             if(array[i][0] == search){
-        return d3.descending(wordsPerGenre.get(a)[i][1], wordsPerGenre.get(b)[i][1]) }}
+        return d3.descending(tfidf.get(a)[i][1], tfidf.get(b)[i][1]) }}
       })
       d3.select("#barchart").selectAll("*").remove();
-      stackedBar(d3.select("#barchart"), tfidf, selectedVal);
+      stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
     })
   
     d3.select("#byName").on("click", function() {

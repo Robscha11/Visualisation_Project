@@ -2,6 +2,7 @@ import * as d3 from "d3";
 
 export function stackedBar(svg, wordsPerGenre, search, genre) {
 
+
     const barHeight = 25;
 
     const width = 400;
@@ -62,10 +63,31 @@ var color = d3.scaleOrdinal()
     .attr("fill", color);
 
 var container = [];
+
+
+    svg.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("width", function(d) {
+            var array = wordsPerGenre.get(d)
+            for(var i = 0; i <= array.length -1; i++){
+                if(array[i][0] == search){
+                    //console.log(array[i][1])
+                    container.push(x(array[i][1]));
+                    return x(array[i][1])
+                }
+            }
+            return 0
+        })
+        .delay(function(d,i){console.log(i) ; return(i*100)});
         
-    if(container.every(item => item === 0)) { 
+        if(container.every(item => item === 0)) { 
+                alert(search + " does not exist in any election program, try another word!");
+            }
+        
+    /*if(container.every(item => item === 0)) { 
         alert(search + " does not exist in any election program, try another word!");
-    }
+    }*/
                                               //Text in jedem Bar (Wert)
    svg.append("g")
     .attr("fill", "white")

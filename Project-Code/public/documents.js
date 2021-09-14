@@ -18,7 +18,7 @@ export function getdocuments(useStemm, useAllPartys) {
 
   //unless otherwise selected, only the first 7 parties are used
   if (!useAllPartys) {
-    Parteien = Parteien.slice(0, 2); //(0,7) für Final
+    Parteien = Parteien.slice(0, 7); //(0,7) für Final
   }
 
   //read all files and store to a Map
