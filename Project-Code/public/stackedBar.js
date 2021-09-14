@@ -1,17 +1,18 @@
 import * as d3 from "d3";
 
-export function stackedBar(svg, wordsPerGenre, search) {
+export function stackedBar(svg, wordsPerGenre, search, genre) {
+
+    const barHeight = 25;
+
     const width = 400;
-    const height = 400;
+    const height = (genre.length+2)*barHeight;
     svg.attr("viewBox", [0, 0, width, height]);
 
     const g = svg
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-const genre = Array.from(wordsPerGenre.keys());
 //const data = wordsPerGenre.get(genre[0]).slice(0, 50);
-
 var x = d3.scaleLinear()
     .domain([0, 1]) //höchster tdidf wert in datenset search in text for "search"
     .range([50, width-50]);
@@ -21,11 +22,13 @@ var y = d3.scaleBand()
 .range([0, height])
 .padding(0.1);
 
-var barHeight = 25;
+
+
+console.log(1-1/genre.length)
 
 var color = d3.scaleOrdinal()
      //.domain(d3.range(genre))
-     .range(d3.schemeRdBu[genre.length]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
+     .range(d3.schemeRdYlGn[9]) // bars sollen unterschiedliche Farben haben, man könnte auch Parteifarben nehmen
 
     svg.append("g")
     .selectAll("rect")
@@ -59,78 +62,10 @@ var color = d3.scaleOrdinal()
     .attr("fill", color);
 
 var container = [];
-
-d3.select("#byValue").on("click", function() {
-genre.sort(function(a,b) {
-    var array = wordsPerGenre.get(a)
-        for(var i = 0; i <= array.length -1; i++){
-        if(array[i][0] == search){
-    return d3.descending(wordsPerGenre.get(a)[i][1], wordsPerGenre.get(b)[i][1]) }}
-  })
-  svg.selectAll("rect")
-    .transition()
-    .duration(500)
-    .attr("y", function(d,i) { return (i * barHeight) +10; })
-    .attr("width", function(d) {
-        var array = wordsPerGenre.get(d)
-        for(var i = 0; i <= array.length -1; i++){
-            if(array[i][0] == search){
-                //console.log(array[i][1])
-                container.push(x(array[i][1]));
-                return x(array[i][1])
-            }
-        }
-        return 0
-    })
-
-  svg.selectAll("text")
-  .attr("y", (d,i) => (i * barHeight + barHeight/2) + 10)
-})
-
-d3.select("#byName").on("click", function() {
-    console.log(genre)
-    genre.sort(function(a, b) {
-        return d3.ascending(a, b)
-      })
-      svg.selectAll("rect")
-        .transition()
-        .duration(500)
-        .attr("y", function(d,i) { return (i * barHeight) +10; })
-        .attr("width", function(d) {
-            var array = wordsPerGenre.get(d)
-            for(var i = 0; i <= array.length -1; i++){
-                if(array[i][0] == search){
-                    //console.log(array[i][1])
-                    container.push(x(array[i][1]));
-                    return x(array[i][1])
-                }
-            }
-            return 0
-        })
-
-      svg.selectAll("text")
-      .attr("y", (d,i) => (i * barHeight + barHeight/2) + 10)
-    })
-
-    svg.selectAll("rect")
-        .transition()
-        .duration(800)
-        .attr("width", function(d) {
-            var array = wordsPerGenre.get(d)
-            for(var i = 0; i <= array.length -1; i++){
-                if(array[i][0] == search){
-                    //console.log(array[i][1])
-                    container.push(x(array[i][1]));
-                    return x(array[i][1])
-                }
-            }
-            return 0
-        })
-        .delay(function(d,i){console.log(i) ; return(i*100)});
         
-        if(container.every(item => item === 0)) { 
-                alert(search + " does not exist in any election program, try another word!");
-            }
+    if(container.every(item => item === 0)) { 
+        alert(search + " does not exist in any election program, try another word!");
+    }
                                               //Text in jedem Bar (Wert)
    svg.append("g")
     .attr("fill", "white")

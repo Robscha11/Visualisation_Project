@@ -32,6 +32,8 @@ document.getElementById("button").onclick = function () {
   searchNode();
 };
 
+
+
 //initalize Data
 var documents;
 var wordList;
@@ -69,7 +71,27 @@ function searchNode() {
     alert("Fill me!");
   }*/
   //else {
+  
   d3.select("#barchart").selectAll("*").remove();
-  stackedBar(d3.select("#barchart"), tfidf, selectedVal);
+  const genre = Array.from(tfidf.keys());
+  stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
   //}
+  d3.select("#byValue").on("click", function() {
+    genre.sort(function(a,b) {
+        var array = wordsPerGenre.get(a)
+            for(var i = 0; i <= array.length -1; i++){
+            if(array[i][0] == search){
+        return d3.descending(wordsPerGenre.get(a)[i][1], wordsPerGenre.get(b)[i][1]) }}
+      })
+      d3.select("#barchart").selectAll("*").remove();
+      stackedBar(d3.select("#barchart"), tfidf, selectedVal);
+    })
+  
+    d3.select("#byName").on("click", function() {
+      genre.sort(function(a, b) {
+          return d3.ascending(a, b)
+        })
+        d3.select("#barchart").selectAll("*").remove();
+        stackedBar(d3.select("#barchart"), tfidf, selectedVal, genre);
+      })
 }
