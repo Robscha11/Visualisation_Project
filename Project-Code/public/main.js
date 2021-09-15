@@ -32,9 +32,7 @@ document.getElementById("button").onclick = function () {
   searchNode();
 };
 
-
-
-//initalize Data
+//initalize data
 var documents;
 var wordList;
 var tfidf;
@@ -71,17 +69,17 @@ function searchNode() {
   d3.select("#barchart").selectAll("*").remove();
   const sortedPartys = Array.from(tfidf.keys());
   stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartys);
-  //}
+  
+  //sort bars by value
   d3.select("#byValue").on("click", function() {
-    sortedPartys.sort(function(a,b,i) {
-        
-        return d3.descending(tfidf.get(a)[a][1], tfidf.get(b)[b][1]) 
-      })
-      console.log(sortedPartys)
+      const reallySorted = new Map([...tfidf.entries()].sort((a, b) => b[1] - a[1]));
+      const sortedPartysByValue = Array.from(reallySorted.keys());
+      
       d3.select("#barchart").selectAll("*").remove();
-      stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartys);
+      stackedBar(d3.select("#barchart"), tfidf, selectedVal, sortedPartysByValue);
     })
   
+    //sort bars by name
     d3.select("#byName").on("click", function() {
       sortedPartys.sort(function(a, b) {
           return d3.ascending(a, b)
