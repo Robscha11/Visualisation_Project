@@ -12,4 +12,3 @@ by their color.
 The Bar chart can be used to freely search for words and compare those words across all parties.
 
 The table is not interactive but shows the three most important words of each party.
-

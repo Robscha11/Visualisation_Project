@@ -42,7 +42,6 @@ var color = d3.scaleOrdinal()
         var array = partys.get(d)
         for(var i = 0; i <= array.length -1; i++){
         if(array[i][0] == search){
-            console.log(array[i][1]);
             return formatPercent(array[i]); }}})
       }) 				
       .on("mouseout",function(){
@@ -73,7 +72,7 @@ var container = [];
             }
             return 0
         })
-        .delay(function(d,i){console.log(i) ; return(i*100)});
+        .delay(function(d,i){return(i*100)});
         
         if(container.every(item => item === 0)) { 
                 alert(search + " does not exist in any election program, try another word!");
