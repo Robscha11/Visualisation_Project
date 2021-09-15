@@ -13,10 +13,10 @@ export function stackedBar(svg, partys, search, sortedPartys) {
     svg.attr("viewBox", [0, 0, width, height]);
 
 var x = d3.scaleLinear()
-    .domain([0, 1]) //höchster tdidf wert in datenset search in text for "search"
-    .range([50, width-50]);
+    .domain([0, 1])
+    .range([50, width-100]);
 
-    //every party gets a bar
+//every party gets a bar
 var y = d3.scaleBand()
 .domain(d3.range(Array.from(partys.keys())))
 .range([0, height])
@@ -74,12 +74,12 @@ var container = [];
         })
         .delay(function(d,i){return(i*100)});
         
-        //check if keywords exist in election programs
-        if(container.every(item => item === 0)) { 
-                alert(search + " does not exist in any election program, try another word!");
-            }
+//check if keywords exist in election programs
+    if(container.every(item => item === 0)) { 
+         alert(search + " does not exist in any election program, try another word!");
+    }
         
-    //text field with name of parties in respective bar
+//text field with name of parties in respective bar
    svg.append("g")
     .attr("fill", "white")
     .attr("text-anchor", "end")
@@ -99,7 +99,7 @@ var container = [];
 
   
 
-  // Y axis
+// Y axis
 var yRange = d3.scaleLinear()
   .range([0, sortedPartys.length * 25]);  
   
@@ -118,7 +118,7 @@ var y_xis = svg.append('g')
 
 
 // X axis
- var scale = d3.scaleLinear()
+var scale = d3.scaleLinear()
         .domain([0, 1])
         .range([50, width-50]);
 
