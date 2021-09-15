@@ -53,12 +53,12 @@ var color = d3.scaleOrdinal()
     .attr("x", 50)
     .attr("y", function(d,i) { return (i * barHeight) +10; })
     .attr("width", 0)
-    .attr("height", barHeight)       //height of bar
+    .attr("height", barHeight)
     .attr("fill", color);
 
 var container = [];
 
-
+//animation of bar values
     svg.selectAll("rect")
         .transition()
         .duration(800)
@@ -74,10 +74,12 @@ var container = [];
         })
         .delay(function(d,i){return(i*100)});
         
+        //check if keywords exist in election programs
         if(container.every(item => item === 0)) { 
                 alert(search + " does not exist in any election program, try another word!");
             }
         
+    //text field with name of parties in respective bar
    svg.append("g")
     .attr("fill", "white")
     .attr("text-anchor", "end")
@@ -117,7 +119,7 @@ var y_xis = svg.append('g')
 
 // X axis
  var scale = d3.scaleLinear()
-        .domain([0, 1])  // 0 - 1
+        .domain([0, 1])
         .range([50, width-50]);
 
 var x_axis = d3.axisBottom()
