@@ -3,27 +3,109 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="/index.css" />
-  <title>Exercise 1</title>
-
-  <style>
-    circle {
-      fill: black;
-    }
-
-    .boxplot {
-      stroke: black;
-    }
-  </style>
+  <title>Election Program Visualization</title>
 
 </head>
 
 <body>
   <main>
-    <h1>Visualization Project SS21</h1>
-    <h2>Exercise 1</h2>
+    <h1>Comparison of the election programs of the parties for the 2021 german federal election.</h1>
+
+    <section>
+      <h2>INTRODUCTION</h2>
+      <p>
+        The content of the webpage is developed as a student project for the course "Visualisation". 
+        The goal is to get quick insights about the content of the election programs of the parties 
+        for the 2021 german federal election.
+      </p>
+    </section>
+    <section>
+      <h2>OPTIONS</h2>
+      <p>
+        In the following, various options can be used that can also change the results. Since the calculations are very complex, loading times can be long.
+      </p>
+<table>
+      <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkPartys" name="checkPartys" value=1>
+          <label for="checkPartys"> all Parties</label>
+        </td>
+        <td width="80%">
+          At the beginning only the election programs of the parties currently represented 
+          in the Bundestag are considered. If you want to see all parties that are eligible 
+          for election in the constituency (Erfurt - Weimar - Weimarer Land II (constituency 193)), 
+          please tick the box.
+        </td>
+       </tr>
+       <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkIDF" name="checkIDF" value=1>
+          <label for="checkIDF"> IDF</label>
+        </td>
+        <td width="80%">
+          At the beginning only the frequency of the words within an election program is calculated. (Term Frequency) 
+          With the selection of Inverse Document Frequency (IDF), the occurrence of a word in all election programs is 
+          taken into account. Words that only appear in a few election programs are considered more important than words 
+          that are represented in all documents.
+        </td>
+       </tr>
+       <tr>
+        <td width="20%">
+          <input type="checkbox" id="checkStemm" name="checkStemm" value=1>
+          <label for="checkStemm"> Stemming</label>
+        </td>
+        <td width="80%">
+          Stemming or the normal form reduction should help to convert the words to their normal form. 
+          Since there can be many changes to a root word in the German language, this function was implemented. 
+          Unfortunately, this only works to a limited extent here. For the sake of interest, however, 
+          this function was retained and made available as an option.
+        </td>
+       </tr></table>
+
+    </section>
+
+
+
+    <section>
+      <h2>COMPARISON CLOUD</h2>
+      <p>In this wordcloud you can choose two parties whose most commonly used words are presented with the respective colors. 
+        The more important the party's word, the larger and more colorful it is.
+      </p>
+      <select style="background-color:rgb(225,190,106)" id="party1"></select></svg>
+      <select style="background-color:rgb(64,176,166)" id="party2"></select>
+      <h2></h2>
+      <svg id="compcloud"></svg>
+        
+    </section>
+
+    <section>
+      <h3>Bar chart</h3>
+      <p>The bar chart is used to get an overview about keywords for all chosen parties. It is possible to just look single keywords up.
+        There is also the possibility to change the ordering.
+      </p>
+            </br>
+      <div class="widget">
+        <input id="search">
+        <button id="button" type="button">Search</button> 
+      </br>
+        <button id="byName"> Sort by Name</button>
+    </div>   
+            </br>  
+        <svg id="barchart"></svg>
+    </section>
+
+    <section>
+          <h2>MOSTLY USED WORDS</h2>
+          <p>
+            Here are the three most commonly used words per party.
+          </p>
+      <svg id="words1"></svg>
+      <svg id="words2"></svg>
+      <svg id="words3"></svg>
+      <svg id="words4"></svg>
+      <svg id="words5"></svg>
+  </section>
 
   </main>
   <script type="module" src="/main.js"></script>
